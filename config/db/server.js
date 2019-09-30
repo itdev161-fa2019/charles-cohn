@@ -8,7 +8,14 @@ const app = express();
 // Connect database
 connectDatabase();
 
+// Configure Middleware
+app.use(express.json({ extended: false }));
+
 // API endpoints
+/**
+ * @route GET /
+ * @desc Test endpoint
+ */
 app.get('/', (req, res) =>
 res.send('http get request sent to root api endpoint')
 );
