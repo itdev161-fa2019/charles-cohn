@@ -27,7 +27,7 @@ app.get('/', (req, res) =>
  */
 
 app.post(
-    'api/users',
+    '/api/users',
     [
         check('name', 'Please enter your name')
             .not()
@@ -43,7 +43,7 @@ app.post(
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         } else {
-            res.send(req.body);
+           return res.send(req.body);
         }
     }
 );
