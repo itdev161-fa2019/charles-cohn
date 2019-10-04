@@ -10,6 +10,14 @@ const app = express();
 // Connect database
 connectDatabase();
 
+// Configure Middleware
+app.use(express.json({ extended: false }));
+app.use(
+    cors({
+        origin: 'http://localhost:3000'
+    })
+);
+
 // API endpoints
 /**
  * @route GET /
@@ -27,14 +35,9 @@ res.send('http get request sent to root api endpoint')
  app.post(
      '/api/users',
      [
-         check('name', 'Please enter your name')
-            .not()
-            .isEmpty(),
+         check('name', 'Please enter your name').not().isEmpty(),
         check('email', 'Please enter a valid email').isEmail(),
-        check(
-            'password',
-            'Please enter a password with 6 or more characters'
-        ).isLength({ min: 6 })
+        check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
      ],
      (req, res) => {
          const errors = validationResult(req);
